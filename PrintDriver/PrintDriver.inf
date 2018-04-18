@@ -1,0 +1,17 @@
+[Defines]
+  INF_VERSION            = 0x00010005
+  BASE_NAME            = PrintDriver
+  FILE_GUID            = 0b3346aa-958a-4f01-98a3-baf9e0164bc4
+  MODULE_TYPE            = UEFI_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT            = MyDriverEntryPoint
+
+[Sources]
+  PrintDriver.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint

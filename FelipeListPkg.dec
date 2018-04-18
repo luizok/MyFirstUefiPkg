@@ -1,0 +1,8 @@
+[Defines]
+  DEC_SPECIFICATION         = 0x00010005
+  PACKAGE_NAME            = FelipeListPkg
+  PACKAGE_GUID            = 6db6ed88-b93b-45d3-bcc5-b974f2cb86b1
+  PACKAGE_VERSION         = 0.1
+
+[Includes]
+  Include
