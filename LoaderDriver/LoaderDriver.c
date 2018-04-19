@@ -3,12 +3,12 @@
 
 EFI_STATUS
 EFIAPI
-PrintDriverMain (
-    IN EFI_HANDLE ImageHandle,
+LoaderDriverMain(
+    IN EFI_HANDLE *ImageHandle,
     IN EFI_SYSTEM_TABLE *SystemTable
 )
 {
-    Print(L"A new UEFI driver has been loaded!! ;)\n");
-    
+
+
     return EFI_SUCCESS;
 }

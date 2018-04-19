@@ -1,13 +1,13 @@
 [Defines]
   INF_VERSION            = 0x00010005
-  BASE_NAME            = PrintDriver
-  FILE_GUID            = 0b3346aa-958a-4f01-98a3-baf9e0164bc4
+  BASE_NAME            = LoaderDriver
+  FILE_GUID            = 697539e3-8155-49f7-8de3-d894d9a1b242
   MODULE_TYPE            = UEFI_DRIVER
   VERSION_STRING        = 1.0
-  ENTRY_POINT            = PrintDriverMain
+  ENTRY_POINT            = LoaderDriverMain
 
 [Sources]
-  PrintDriver.c
+  LoaderDriver.c
 
 [Packages]
   MdePkg/MdePkg.dec

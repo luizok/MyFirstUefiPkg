@@ -24,3 +24,4 @@
 
 [Components]
   FelipeListPkg/PrintDriver/PrintDriver.inf
+  FelipeListPkg/InputDriver/InputDriver.inf
