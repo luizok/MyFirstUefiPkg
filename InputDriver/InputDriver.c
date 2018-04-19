@@ -1,7 +1,37 @@
 #include <Uefi.h>
 #include <Library/UefiLib.h>
+#include <Library/UefiBootServicesTableLib.h>
+#include <Library/MemoryAllocationLib.h>
 
-#define BUFFER_SIZE 256
+#define BUFFER_SIZE 16
+
+EFI_STATUS
+ReadInputString(
+    EFI_SIMPLE_TEXT_INPUT_PROTOCOL *ConsoleIn,
+    CHAR16 **StrBuff
+)
+{
+    EFI_STATUS Status = EFI_SUCCESS;
+    EFI_INPUT_KEY Key;
+    UINTN Index, Count;
+    *StrBuff = AllocateZeroPool(BUFFER_SIZE * sizeof(CHAR16));
+
+    Index = 0;
+    do {
+        gBS->WaitForEvent(1, &ConsoleIn->WaitForKey, &Count);
+        Status = ConsoleIn->ReadKeyStroke(ConsoleIn, &Key);
+
+        Print(L"Status code: %d\n", Status);
+
+        (*StrBuff)[Index] = Key.UnicodeChar;
+
+        Print(L"String is = %s\n\n\r", *StrBuff);
+
+    }while((*StrBuff)[Index++] == SCAN_LF && Index < BUFFER_SIZE-1);
+    (*StrBuff)[Index] = '\0';
+
+    return Status;
+}
 
 EFI_STATUS
 EFIAPI
@@ -12,21 +42,11 @@ InputDriverMain (
 {
     
     EFI_STATUS Status = EFI_SUCCESS;
-    // EFI_SIMPLE_TEXT_INPUT_PROTOCOL *TextIn = SystemTable->ConIn;
-    EFI_INPUT_KEY Key;
+    CHAR16 *StrBuffer = NULL;
 
     Print(L"Type something:\n\r");
-
-    Status = SystemTable->ConIn->Reset(SystemTable->ConIn, FALSE);
-    if(EFI_ERROR(Status))
-        return Status;
-
-    while(TRUE) {
-        WaitForSingleEvent();
-    }
-
-    Print(L"String ScanCode = 0x%x\n\r", Key.ScanCode);
-    Print(L"String Unicode  = 0x%x\n\r", Key.UnicodeChar);
+    Status = ReadInputString(gST->ConIn, &StrBuffer);
+    Print(L"Final String = %s\n\r", StrBuffer);
 
     return EFI_SUCCESS;
 }
