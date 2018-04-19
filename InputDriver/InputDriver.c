@@ -27,7 +27,7 @@ ReadInputString(
 
         Print(L"String is = %s\n\n\r", *StrBuff);
 
-    }while((*StrBuff)[Index++] == SCAN_LF && Index < BUFFER_SIZE-1);
+    }while((*StrBuff)[Index++] != SCAN_F3 && Index < BUFFER_SIZE-1);
     (*StrBuff)[Index] = '\0';
 
     return Status;
