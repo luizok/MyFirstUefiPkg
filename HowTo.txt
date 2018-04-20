@@ -1,2 +1,0 @@
-como ler strings?
-como passar argumentos externos?
