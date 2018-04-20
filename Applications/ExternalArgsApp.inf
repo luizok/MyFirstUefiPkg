@@ -1,0 +1,20 @@
+ 
+[Defines]
+  INF_VERSION            = 0x00010005
+  BASE_NAME            = ExternalArgsApp
+  FILE_GUID            = f2c33e30-fef8-4b31-b993-0d3fa9232ab0
+  MODULE_TYPE            = UEFI_APPLICATION
+  VERSION_STRING        = 1.0
+  ENTRY_POINT            = ExternalArgsAppMain
+
+[Sources]
+  ExternalArgsApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ShellPkg/ShellPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiApplicationEntryPoint
+  ShellLib

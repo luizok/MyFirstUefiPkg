@@ -45,7 +45,7 @@ ReadInputString(
 
         (*StrBuff)[Index] = Key.UnicodeChar;
 
-        Print(L"String = %s\n\n\r", *StrBuff);
+        Print(L"String = %s\n\r", *StrBuff);
 
     }while((*StrBuff)[Index++] != SCAN_F3 && Index < BUFFER_SIZE-1);
     (*StrBuff)[Index-1] = '\0';
