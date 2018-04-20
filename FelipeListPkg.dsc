@@ -9,6 +9,7 @@
   SKUID_IDENTIFIER        = DEFAULT
 
 [LibraryClasses]
+  UefiApplicationEntryPoint|MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
   UefiDriverEntryPoint|MdePkg/Library/UefiDriverEntryPoint/UefiDriverEntryPoint.inf
   UefiLib|MdePkg/Library/UefiLib/UefiLib.inf
   UefiBootServicesTableLib|MdePkg/Library/UefiBootServicesTableLib/UefiBootServicesTableLib.inf
@@ -23,5 +24,5 @@
   UefiRuntimeServicesTableLib|MdePkg/Library/UefiRuntimeServicesTableLib/UefiRuntimeServicesTableLib.inf
 
 [Components]
-  FelipeListPkg/PrintDriver/PrintDriver.inf
-  FelipeListPkg/InputDriver/InputDriver.inf
+  FelipeListPkg/Applications/PrintApp.inf
+  FelipeListPkg/Applications/InputApp.inf
