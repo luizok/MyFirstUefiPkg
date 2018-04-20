@@ -45,8 +45,7 @@ UINTN GetMax(
     UINTN Index;
     
     for(Index=1; Index < VectorSize; Index++)
-        if(Vector[Index] > Max)
-            Max = Vector[Index];
+        Max = Vector[Index] > Max ? Vector[Index] : Max;
         
     return Max;
 }
@@ -60,8 +59,8 @@ UINTN GetMid(
 }
 
 UINTN pow(
-    UINTN Number,
-    UINTN Exp
+    IN UINTN Number,
+    IN UINTN Exp
 )
 {
     if(Exp == 0)
@@ -76,7 +75,7 @@ UINTN pow(
 }
 
 UINTN GetNumberValue(
-    CHAR16 *Number
+    IN CHAR16 *Number
 )
 {
     UINTN Size = StrLen(Number);

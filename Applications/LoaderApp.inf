@@ -1,17 +1,19 @@
 [Defines]
   INF_VERSION            = 0x00010005
   BASE_NAME            = LoaderApp
-  FILE_GUID            = 0b3346aa-958a-4f01-98a3-baf9e0164bc4
+  FILE_GUID            = 77dc7540-c12a-4282-a66f-d7d58e7bfe94
   MODULE_TYPE            = UEFI_APPLICATION
   VERSION_STRING        = 1.0
-  ENTRY_POINT            = PrintAppMain
+  ENTRY_POINT            = LoaderAppMain
 
 [Sources]
   LoaderApp.c
 
 [Packages]
   MdePkg/MdePkg.dec
-
+  ShellPkg/ShellPkg.dec
+  
 [LibraryClasses]
   UefiLib
   UefiApplicationEntryPoint
+  ShellLib

@@ -7,7 +7,7 @@
 
 UINTN
 StrSizeLen(
-    CHAR16 *Str
+    IN CHAR16 *Str
 )
 {
         UINTN Count = 0;
@@ -18,7 +18,7 @@ StrSizeLen(
 }
 
 void RemovePosfixPkg(
-    CHAR16 **StrWithPkg
+    OUT CHAR16 **StrWithPkg
 )
 {
     UINTN StrSize = StrSizeLen(*StrWithPkg);
@@ -28,8 +28,8 @@ void RemovePosfixPkg(
 
 EFI_STATUS
 ReadInputString(
-    EFI_SIMPLE_TEXT_INPUT_PROTOCOL *ConsoleIn,
-    CHAR16 **StrBuff
+    IN EFI_SIMPLE_TEXT_INPUT_PROTOCOL *ConsoleIn,
+    OUT CHAR16 **StrBuff
 )
 {
     EFI_STATUS Status = EFI_SUCCESS;

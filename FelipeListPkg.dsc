@@ -88,4 +88,4 @@
   FelipeListPkg/Applications/PrintApp.inf
   FelipeListPkg/Applications/InputApp.inf
   FelipeListPkg/Applications/ExternalArgsApp.inf
-
+  FelipeListPkg/Applications/LoaderApp.inf
