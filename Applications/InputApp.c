@@ -3,7 +3,7 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/MemoryAllocationLib.h>
 
-#define BUFFER_SIZE 16
+#define BUFFER_SIZE 32
 
 UINTN
 StrSizeLen(
@@ -17,7 +17,8 @@ StrSizeLen(
         return Count-1;
 }
 
-void RemovePosfixPkg(
+void
+RemovePosfixPkg(
     OUT CHAR16 **StrWithPkg
 )
 {

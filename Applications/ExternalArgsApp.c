@@ -2,11 +2,20 @@
 #include <Library/UefiLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/MemoryAllocationLib.h>
-#include <Protocol/EfiShellParameters.h> 
+#include <Protocol/EfiShellParameters.h>
+#include <Library/SortLib.h> 
 
+
+UINTN LowerThanEquals(
+    UINTN *x,
+    UINTN *y
+)
+{
+    return *x <= *y ? -1 : 1;
+}
 
 UINTN CharToInt(
-    CHAR16 Char
+    IN CHAR16 Char
 )
 {
     switch(Char)
@@ -37,8 +46,8 @@ UINTN CharToInt(
 }
 
 UINTN GetMax(
-    UINTN *Vector,
-    UINTN VectorSize
+    IN UINTN *Vector,
+    IN UINTN VectorSize
 )
 {
     UINTN Max = Vector[0];
@@ -48,14 +57,6 @@ UINTN GetMax(
         Max = Vector[Index] > Max ? Vector[Index] : Max;
         
     return Max;
-}
-
-UINTN GetMid(
-    UINTN *Vector,
-    UINTN VectorSize
-)
-{
-    return 0;
 }
 
 UINTN pow(
@@ -88,6 +89,21 @@ UINTN GetNumberValue(
     return Value;
 }
 
+VOID PrintVector(
+    IN UINTN *Vector,
+    IN UINTN VectorSize
+)
+{
+    UINTN Index;
+    Print(L"v = (");
+    for(Index=0; Index < VectorSize; Index++) 
+        Print(L"%d, ", Vector[Index]);
+
+    Print(L")\n\r");
+
+    return;
+}
+
 EFI_STATUS
 EFIAPI
 ExternalArgsAppMain (
@@ -97,13 +113,12 @@ ExternalArgsAppMain (
 {
     EFI_SHELL_PARAMETERS_PROTOCOL *EfiShellParametersProtocol = NULL;
     EFI_STATUS Status = gBS->OpenProtocol (
-                    ImageHandle,
-                    &gEfiShellParametersProtocolGuid,
-                    (VOID **) &EfiShellParametersProtocol,
-                    ImageHandle,
-                    NULL,
-                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
-                    );
+                                ImageHandle,
+                                &gEfiShellParametersProtocolGuid,
+                                (VOID **) &EfiShellParametersProtocol,
+                                ImageHandle,
+                                NULL,
+                                EFI_OPEN_PROTOCOL_GET_PROTOCOL);
 
     UINTN Argc = EfiShellParametersProtocol->Argc;
     CHAR16 **Argv = EfiShellParametersProtocol->Argv;
@@ -111,14 +126,16 @@ ExternalArgsAppMain (
     UINTN Numbers[Argc-1];
     UINTN Index;
     
-    Print(L"v = (");
-    for(Index=1; Index < Argc; Index++) {
+    for(Index=1; Index < Argc; Index++)
         Numbers[Index-1] = GetNumberValue(Argv[Index]);
-        Print(L"%d, ", Numbers[Index-1]);
-    }
-    Print(L")\n\r");
-    
-    Print(L"max(v) + Md(v) = %d\n\r", GetMax(Numbers, Argc-1)+GetMid(Numbers, Argc-1));
-    
+
+    PrintVector(Numbers, Argc-1);
+    PerformQuickSort(Numbers, Argc-1, sizeof(UINTN), (SORT_COMPARE) LowerThanEquals);
+    PrintVector(Numbers, Argc-1);
+
+    UINTN sum = GetMax(Numbers, Argc-1) + Numbers[(UINTN) (Argc-1)/2];
+    Print(L"max(v) + Md(v) = max(v) + v'(%d) = ", (UINTN) (Argc-1)/2);
+    Print(L"%d + %d = %d\n\r", GetMax(Numbers, Argc-1), Numbers[(UINTN) (Argc-1)/2], sum);
+
     return Status;
 }
